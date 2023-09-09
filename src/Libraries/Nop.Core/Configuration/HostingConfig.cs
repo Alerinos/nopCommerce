@@ -15,18 +15,24 @@ public partial class HostingConfig : IConfig
     /// </summary>
     public string ForwardedProtoHeaderName { get; protected set; } = string.Empty;
 
-    /// <summary>
-    /// Gets or sets the header used to retrieve the originating client IP
-    /// </summary>
-    public string ForwardedForHeaderName { get; protected set; } = string.Empty;
+        /// <summary>
+        /// Gets or sets the header used to retrieve the originating client IP
+        /// </summary>
+        public string ForwardedForHeaderName { get; protected set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets addresses of known proxies to accept forwarded headers from
     /// </summary>
     public string KnownProxies { get; protected set; } = string.Empty;
 
-    /// <summary>
-    /// Gets or sets addresses of known networks to accept forwarded headers from
-    /// </summary>
-    public string KnownNetworks { get; protected set; } = string.Empty;
+        /// <summary>
+        /// Gets or sets addresses of known networks to accept forwarded headers from
+        /// </summary>
+        public string KnownNetworks { get; protected set; } = string.Empty;        
+        
+        /// <summary>
+        /// Ability to set a custom path base, for example domain.com/path/
+        /// </summary>
+        public string UsePathBase { get; protected set; } = "/";
+    }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Nop.Core.Configuration;
 using Nop.Core.Infrastructure.Mapper;
 
 namespace Nop.Core.Infrastructure;
@@ -151,10 +152,16 @@ public partial class NopEngine : IEngine
             .Where(startup => startup != null)
             .OrderBy(startup => startup.Order);
 
-        //configure request pipeline
-        foreach (var instance in instances)
-            instance.Configure(application);
-    }
+            var settings = ServiceProvider.GetService<AppSettings>().Get<HostingConfig>();
+
+            // Use Path Base
+            if (!string.IsNullOrEmpty(settings.UsePathBase))
+                application.UsePathBase(settings.UsePathBase);
+
+            //configure request pipeline
+            foreach (var instance in instances)
+                instance.Configure(application);
+        }
 
     /// <summary>
     /// Resolve dependency
